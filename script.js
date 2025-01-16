@@ -4,7 +4,7 @@ const pokemonImageElement = document.getElementById("pokemonImage");
 const optionsContainer = document.getElementById("options");
 const pointsElement = document.getElementById("pointsValue");
 const totalCount = document.getElementById("totalCount");
-const mainContainer = document.getElementById("container");
+const mainContainer = document.getElementsByClassName("container");
 const loadingContainer = document.getElementById("loadingContainer");
 
 //Variables
@@ -15,6 +15,7 @@ let showLoading = false;
 
 // Creating fetch functions
 async function fetchPokemonById(id) {
+    showLoading = true;
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const data = await response.json();
     return data;
@@ -32,6 +33,10 @@ async function fetchPokemonById(id) {
 
 //Load question with options
 async function loadQuestionWithOptions() {
+    if(showLoading) {
+        showLoadingWindow();
+        hidePuzzleWindow();
+    }
     //fetch answer
     let pokemonId = getRandomPokemonId();
 
@@ -64,6 +69,11 @@ async function loadQuestionWithOptions() {
 
         console.log(options);
         console.log(optionsIds);
+
+        //turn off loading
+        if(options.length === 4) {
+            showLoading = false;
+        }
     }
 
     shuffleArray(options);
@@ -74,12 +84,17 @@ async function loadQuestionWithOptions() {
 
     //Create html elements 
     optionsContainer.innerHTML = "";
-    options.forEach((option, index) => {
+    options.forEach((option) => {
         const button = document.createElement("button");
         button.textContent = option;
         button.onclick = (event) => checkAnswer(option === pokemon.species.name, event);
         optionsContainer.appendChild(button);
     });
+
+    if(!showLoading) {
+        hideLoadingWindow();
+        showPuzzleWindow();
+    }
 }
 
 loadQuestionWithOptions();
@@ -128,4 +143,29 @@ function shuffleArray(array){
 //update result
 function displayResult(result) {
     resultElement.textContent = result;
+}
+
+//hide loading
+function hideLoadingWindow(){
+    loadingContainer.classList.add("hide");
+}
+
+//show loading
+function showLoadingWindow() {
+    mainContainer[0].classList.remove("show");
+    loadingContainer.classList.remove("hide");
+    loadingContainer.classList.add("show");
+}
+
+
+//show puzzle window
+function showPuzzleWindow() {
+    loadingContainer.classList.remove("show");
+    mainContainer[0].classList.remove("hide");
+    mainContainer[0].classList.add("show");
+}
+
+//hide puzzle
+function hidePuzzleWindow() {
+    mainContainer[0].classList.add("hide");
 }
