@@ -20,6 +20,13 @@ body {
     color: var(--white-color);
 }
 
+.container {
+    display:flex;
+    max-width:300;
+    flex-direction: column;
+    gap: 50px;
+}
+
 .header {
     margin:0;
     font-family: "Rammetto One", sans-serif;
@@ -29,7 +36,7 @@ body {
 }
 
 #pokemonImage {
-    height: 200px;
+    height: 300px;
     max-width: 100%;
 }
 
