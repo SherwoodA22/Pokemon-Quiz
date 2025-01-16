@@ -101,6 +101,7 @@ loadQuestionWithOptions();
 
 //Check Answer
 function checkAnswer(isCorrect, event) {
+    let old_backgroud = document.body.style.background;
     const selectedButton = document.querySelector(".selected");
 
     if (selectedButton) {
@@ -116,13 +117,16 @@ function checkAnswer(isCorrect, event) {
         points++;
         pointsElement.textContent = points;
         event.target.classList.add("correct");
+        document.body.style.background = "#5aae76";
     }else{
         displayResult("Wrong Answer...", "wrong");
         event.target.classList.add("wrong");
+        document.body.style.background = "#e13e3e";
     }
 
     //load next question
     setTimeout(() => {
+        document.body.style.background = old_backgroud;
         showLoading = true;
         loadQuestionWithOptions();
     }, 1000);
@@ -152,6 +156,7 @@ function hideLoadingWindow(){
 
 //show loading
 function showLoadingWindow() {
+    setTimeout(1000);
     mainContainer[0].classList.remove("show");
     loadingContainer.classList.remove("hide");
     loadingContainer.classList.add("show");

@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
     margin:0;
     font-family: "Poppins", sans-serif;
-    background:linear-gradient(135deg, #3b4cca 0%, #ff3535 100%);
+    background:linear-gradient(90deg, #ffffff 0%, #000000 100%);
     color: var(--white-color);
 }
 
@@ -55,7 +55,7 @@ button {
     text-transform: capitalize;
     cursor: pointer;
     background-color: var(--white-color);
-    border: none;
+    border:none;
     border-radius: 5px;
 }
 
@@ -65,12 +65,12 @@ button:hover {
 }
 
 button.correct {
-    background-color: var(--button-correct);
+    background-color: #000000;
     color: var(--white-color);
 }
 
 button.wrong {
-    background-color: var(--button-wrong);
+    background-color: #000000;
     color: var(--white-color);
 }
 
